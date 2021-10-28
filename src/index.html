@@ -1,0 +1,42 @@
+
+<div>
+	<input
+		placeholder="1. focus me"
+		onblur="(() => {
+      setTimeout(() => closeList(), 100);
+			on_input_blur_sync();
+    })()"
+	/>
+	<ul onclick="on_ul_click()">
+		<li>2. click me</li>
+	</ul>
+</div>
+<script>
+	let input = document.querySelector('input');
+  const ul = document.querySelector('ul');
+
+	function on_ul_click() {
+		console.log("on_ul_click");
+		input.focus();
+	}
+
+	function on_input_blur_sync() {
+		console.log("on_input_blur_sync");
+	}
+
+	function closeList() {
+		ul.classList.add('hidden')
+	}
+</script>
+
+<style>
+	.hidden {
+		display: none;
+	}
+	ul {
+		background-color: aliceblue;
+	}
+	li {
+		line-height: 60px;
+	}
+</style>
