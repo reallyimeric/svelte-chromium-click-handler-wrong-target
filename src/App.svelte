@@ -1,30 +1,47 @@
 <script>
-	export let name;
+	import { onMount } from "svelte";
+
+	let input;
+	let showList = true;
+
+	onMount(() => {});
+
+	function on_ul_click() {
+		console.log("on_ul_click");
+		input.focus();
+	}
+
+	function on_input_blur_sync() {
+		console.log("on_input_blur_sync");
+	}
+
+	function closeList() {
+		showList = false
+	}
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<div>
+	<input
+		placeholder="1. focus me"
+		bind:this={input}
+		on:blur={() => {
+			setTimeout(() => closeList(), 100);
+			on_input_blur_sync();
+		}}
+	/>
+	<ul on:click={on_ul_click} class:hidden={!showList}>
+		<li>2. click me</li>
+	</ul>
+</div>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+	.hidden {
+		display: none;
 	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	ul {
+		background-color: aliceblue;
 	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	li {
+		line-height: 60px;
 	}
 </style>
